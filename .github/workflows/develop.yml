@@ -1,0 +1,5 @@
+name: Push de alterações para branch de desenvolvimento
+on:
+    push:
+        branches:
+            - develop

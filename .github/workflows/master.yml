@@ -1,0 +1,5 @@
+name: Pull Request de alterações para branch de produção
+on:
+    pull_request:
+        branches:
+            - master
