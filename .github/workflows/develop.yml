@@ -3,3 +3,7 @@ on:
     push:
         branches:
             - develop
+jobs:
+    web-deploy:
+        name: Deploy develop
+        runs-on: ubuntu-latest
