@@ -7,3 +7,6 @@ jobs:
     web-deploy:
         name: Deploy develop
         runs-on: ubuntu-latest
+        steps:
+        - name: Sincronizando códigos do repositório
+          uses: actions/checkout@v2
