@@ -4,7 +4,7 @@ import 'express-async-errors';
 
 import express from 'express';
 
-import '../container';
+// import '../container';
 
 import createConnection from '../typeorm';
 

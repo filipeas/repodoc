@@ -10,8 +10,8 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@domain/": [
-                "./src/domain/"
+            "@domain/*": [
+                "./src/domain/*"
             ],
             "@infra/*": [
                 "./src/infra/*"
