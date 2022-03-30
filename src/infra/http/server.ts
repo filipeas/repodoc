@@ -4,14 +4,13 @@ import 'express-async-errors';
 
 import express from 'express';
 
-import '../container';
+// import '../container';
 
 import createConnection from '../typeorm';
 
 import { routes } from './routes';
 
 import { handleException } from './middlewares/handleException';
-
 
 createConnection();
 const app = express();

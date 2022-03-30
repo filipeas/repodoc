@@ -35,7 +35,7 @@
         "mysql": "^2.18.1",
         "reflect-metadata": "^0.1.13",
         "tsyringe": "^4.6.0",
-        "typeorm": "^0.3.4",
+        "typeorm": "^0.2.44",
         "uuid": "^8.3.2"
     }
 }
