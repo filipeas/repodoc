@@ -7,5 +7,4 @@ describe('Teste de autenticação do usuário', () => {
     it('editar sem parametros usuário', async () => {});
     it('editar sem email usuário', async () => {});
     it('editar sem senha usuário', async () => {});
-    it('excluir usuário', async () => {});
 })
