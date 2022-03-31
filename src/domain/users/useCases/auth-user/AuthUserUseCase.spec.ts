@@ -1,11 +1,6 @@
 describe('Teste de autenticação do usuário', () => {
-    it('cadastrar usuário', async () => {});
-    it('cadastrar sem parametros usuário', async () => {});
-    it('cadastrar sem email usuário', async () => {});
-    it('cadastrar sem senha usuário', async () => {});
-    it('editar usuário', async () => {});
-    it('editar sem parametros usuário', async () => {});
-    it('editar sem email usuário', async () => {});
-    it('editar sem senha usuário', async () => {});
-    it('excluir usuário', async () => {});
+    it('logar com usuário existente', async () => {});
+    it('logar sem informar email', async () => {});
+    it('logar sem informar senha', async () => {});
+    it('logar com usuário inexistente', async () => {});
 })

@@ -6,8 +6,8 @@ import { sign } from 'jsonwebtoken';
 
 import { IUserRepository } from '@domain/users/repositories/IUserRepository';
 import { BadRequestError } from '@infra/http/errors/BadRequestError';
-import { IResponseCreateUser } from '@domain/users/response/IResponseCreateUser';
-import { IRequestCreateUser } from '@domain/users/request/IRequestCreateUser';
+import { IResponseAuthUser } from '@domain/users/response/IResponseAuthUser';
+import { IRequestAuthUser } from '@domain/users/request/IRequestAuthUser';
 
 @injectable()
 export class AuthUserUseCase {
@@ -16,7 +16,7 @@ export class AuthUserUseCase {
         private userRepository: IUserRepository,
     ) { }
 
-    async run({ email, password }: IRequestCreateUser): Promise<IResponseCreateUser> {
+    async run({ email, password }: IRequestAuthUser): Promise<IResponseAuthUser> {
         const user = await this.userRepository.findByEmail(email);
         if (!user) {
             throw new BadRequestError('E-mail ou senha incorreta');
