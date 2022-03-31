@@ -8,6 +8,8 @@ import { UpdateUserController } from '@domain/users/useCases/update-user/UpdateU
 import { Router } from 'express';
 
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import validate from '../middlewares/validation';
+import { CreateUserSchema } from '../validations/CreateUserSchema';
 
 const usersRouter = Router();
 
@@ -20,7 +22,7 @@ const updatePassword = new UpdatePasswordController();
 const updateUser = new UpdateUserController();
 
 // public routes
-usersRouter.post('/', createUserController.handle);
+usersRouter.post('/', validate(CreateUserSchema), createUserController.handle);
 
 // auth routes
 usersRouter.use(ensureAuthenticated);
