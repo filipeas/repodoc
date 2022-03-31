@@ -16,23 +16,26 @@ import { UpdateUserSchema } from '../validations/UpdateUserSchema';
 const usersRouter = Router();
 
 const createUserController = new CreateUserController();
-const deleteUserController = new DeleteUserController();
+
 const listAllUserController = new ListAllUserController();
 const listUserByEmail = new ListUserByEmailController();
 const listUserByID = new ListUserByIDController();
-const updatePassword = new UpdatePasswordController();
+
 const updateUser = new UpdateUserController();
+const updatePassword = new UpdatePasswordController();
+
+const deleteUserController = new DeleteUserController();
 
 // public routes
 usersRouter.post('/', validate(CreateUserSchema), createUserController.handle);
 
 // auth routes
 usersRouter.use(ensureAuthenticated);
-usersRouter.delete('/', deleteUserController.handle);
 usersRouter.get('/', listAllUserController.handle);
 usersRouter.get('/email/:email', listUserByEmail.handle);
 usersRouter.get('/id/:id', listUserByID.handle);
-usersRouter.put('/id/:id/edit/password', validate(UpdatePasswordUserSchema), updatePassword.handle);
 usersRouter.put('/id/:id', validate(UpdateUserSchema), updateUser.handle);
+usersRouter.put('/id/:id/edit/password', validate(UpdatePasswordUserSchema), updatePassword.handle);
+usersRouter.delete('/id/:id', deleteUserController.handle);
 
 export { usersRouter };
