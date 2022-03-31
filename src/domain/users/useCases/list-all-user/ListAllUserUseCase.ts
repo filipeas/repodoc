@@ -7,11 +7,11 @@ import { IResponseListAllUser } from '@domain/users/response/IResponseListAllUse
 export class ListAllUserUseCase {
     constructor(
         @inject('UserRepository')
-        private usersRepository: IUserRepository,
+        private userRepository: IUserRepository,
     ) { }
 
     async run(): Promise<IResponseListAllUser[]> {
-        const existentUser = await this.usersRepository.findAll();
+        const existentUser = await this.userRepository.findAll();
 
         return existentUser.map(user => ({
             id: user.id,
