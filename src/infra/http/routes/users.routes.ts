@@ -10,6 +10,8 @@ import { Router } from 'express';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import validate from '../middlewares/validation';
 import { CreateUserSchema } from '../validations/CreateUserSchema';
+import { UpdatePasswordUserSchema } from '../validations/UpdatePasswordUserSchema';
+import { UpdateUserSchema } from '../validations/UpdateUserSchema';
 
 const usersRouter = Router();
 
@@ -30,7 +32,7 @@ usersRouter.delete('/', deleteUserController.handle);
 usersRouter.get('/', listAllUserController.handle);
 usersRouter.get('/email/:email', listUserByEmail.handle);
 usersRouter.get('/id/:id', listUserByID.handle);
-usersRouter.put('/id/:id/edit/password', updatePassword.handle);
-usersRouter.put('/id/:id', updateUser.handle);
+usersRouter.put('/id/:id/edit/password', validate(UpdatePasswordUserSchema), updatePassword.handle);
+usersRouter.put('/id/:id', validate(UpdateUserSchema), updateUser.handle);
 
 export { usersRouter };
