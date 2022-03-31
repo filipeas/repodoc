@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUser1648640053667 implements MigrationInterface {
+export class CreateDocument1648768406329 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'users',
+                name: 'documents',
                 columns: [
                     {
                         name: 'id',
@@ -16,19 +16,23 @@ export class CreateUser1648640053667 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'name',
+                        name: 'title',
                         type: 'varchar',
                         isNullable: false,
                     },
                     {
-                        name: 'email',
+                        name: 'description',
                         type: 'varchar',
-                        isNullable: false,
-                        isUnique: true,
+                        isNullable: true,
                     },
                     {
-                        name: 'password',
-                        type: 'varchar',
+                        name: 'status',
+                        type: 'boolean',
+                        isNullable: false,
+                    },
+                    {
+                        name: 'privacy',
+                        type: 'boolean',
                         isNullable: false,
                     },
                     {
@@ -43,18 +47,13 @@ export class CreateUser1648640053667 implements MigrationInterface {
                         default: 'now()',
                         isNullable: false,
                     },
-                    {
-                        name: 'deleted_at',
-                        type: 'timestamp',
-                        isNullable: true,
-                    },
                 ],
             }),
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('users');
+        await queryRunner.dropTable('documents');
     }
 
 }
