@@ -12,4 +12,4 @@ describe('Teste de cadastro de documento', () => {
     it('editar documento sem descricao', async () => {});
     it('editar documento sem status', async () => {});
     it('editar documento sem privacidade', async () => {});
-})
+});

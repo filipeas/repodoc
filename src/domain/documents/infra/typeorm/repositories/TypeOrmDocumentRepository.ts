@@ -33,6 +33,15 @@ export class TypeOrmDocumentRepository implements IDocumentRepository {
         });
     }
 
+    async findByIDAndSlug(
+        id: string,
+        slug: string,
+    ): Promise<Document | undefined> {
+        return this.repository.findOne({
+            where: [{ id, slug }],
+        });
+    }
+
     async save(document: Document): Promise<Document> {
         return this.repository.save(document);
     }
