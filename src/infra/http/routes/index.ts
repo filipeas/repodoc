@@ -1,5 +1,6 @@
 import { response, Router } from 'express';
 import { authenticateRouter } from './authenticate.routes';
+import { documentsRouter } from './documents.routes';
 import { usersRouter } from './users.routes';
 
 const routes = Router();
@@ -16,5 +17,6 @@ routes.get('/', (request, response) => {
 
 routes.use('/auth', authenticateRouter);
 routes.use('/users', usersRouter);
+routes.use('/documents', documentsRouter);
 
 export { routes };
