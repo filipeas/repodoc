@@ -15,6 +15,9 @@ export class Document {
     title!: string;
 
     @Column()
+    slug!: string;
+
+    @Column()
     description!: string;
 
     @Column()

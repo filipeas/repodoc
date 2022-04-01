@@ -19,13 +19,22 @@ export class TypeOrmDocumentRepository implements IDocumentRepository {
     }
 
     async findById(id: string, relations = []): Promise<Document | undefined> {
-        return await this.repository.findOne({
-            where: [{ id }, { relations }]
+        return this.repository.findOne({
+            where: [{ id }, { relations }],
+        });
+    }
+
+    async findBySlug(
+        slug: string,
+        relations = [],
+    ): Promise<Document | undefined> {
+        return this.repository.findOne({
+            where: [{ slug }, { relations }],
         });
     }
 
     async save(document: Document): Promise<Document> {
-        return await this.repository.save(document);
+        return this.repository.save(document);
     }
 
     async delete(document: Document): Promise<void> {

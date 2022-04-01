@@ -1,7 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateDocument1648768406329 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -13,6 +12,11 @@ export class CreateDocument1648768406329 implements MigrationInterface {
                         generationStrategy: 'increment',
                         isGenerated: true,
                         isPrimary: true,
+                        isNullable: false,
+                    },
+                    {
+                        name: 'slug',
+                        type: 'varchar',
                         isNullable: false,
                     },
                     {
@@ -55,5 +59,4 @@ export class CreateDocument1648768406329 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('documents');
     }
-
 }

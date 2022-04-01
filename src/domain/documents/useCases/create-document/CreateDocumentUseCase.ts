@@ -2,36 +2,47 @@ import { inject, injectable } from 'tsyringe';
 
 import { IDocumentRepository } from '@domain/documents/repositories/IDocumentRepository';
 
-import { hash } from 'bcrypt';
 import { BadRequestError } from '@infra/http/errors/BadRequestError';
 import { IRequestCreateDocument } from '@domain/documents/request/IRequestCreateDocument';
 import { IResponseCreateDocument } from '@domain/documents/response/IResponseCreateDocument';
+import { generateSlug } from '@infra/utils/generateSlug';
 
 @injectable()
 export class CreateDocumentUseCase {
     constructor(
         @inject('DocumentRepository')
-        private documentRepository: IDocumentRepository
-    ) { }
+        private documentRepository: IDocumentRepository,
+    ) {}
 
-    async run({ title, description, status, privacy }: IRequestCreateDocument): Promise<IResponseCreateDocument> {
-        const existentUser = await this.documentRepository.findByEmail(email);
+    async run({
+        title,
+        description,
+        status,
+        privacy,
+    }: IRequestCreateDocument): Promise<IResponseCreateDocument> {
+        const slug = generateSlug(title);
+        const existentDocument = await this.documentRepository.findBySlug(slug);
 
-        if (existentUser) {
-            throw new BadRequestError('E-mail já cadastrado');
+        if (existentDocument) {
+            throw new BadRequestError(
+                'Documento já cadastrado com esse título',
+            );
         }
 
-        const passwordHash = await hash(password, 8);
-
-        const user = await this.userRepository.create({
-            name,
-            email,
-            password: passwordHash
+        const document = await this.documentRepository.create({
+            slug,
+            title,
+            description,
+            status,
+            privacy,
         });
 
         return {
-            name: user.name,
-            email: user.email,
+            slug: document.slug,
+            title: document.title,
+            description: document.description,
+            status: document.status,
+            privacy: document.privacy,
         };
     }
 }
