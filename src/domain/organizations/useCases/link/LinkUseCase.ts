@@ -24,33 +24,39 @@ export class LinkUseCase {
 
     async run({ user_id, document_id, level_id }: IRequestCreateLink): Promise<IResponseCreateLink> {
         const existentUser = await this.userRepository.findById(user_id);
-
-        if (existentUser) {
+        if (!existentUser) {
             throw new BadRequestError('Usuário não encontrado');
         }
 
         const existentDocument = await this.documentRepository.findById(document_id);
-
-        if (existentDocument) {
+        if (!existentDocument) {
             throw new BadRequestError('Documento não encontrado');
         }
 
         const existentLevel = await this.levelRepository.findById(level_id);
-
-        if (existentLevel) {
+        if (!existentLevel) {
             throw new BadRequestError('Nível de acesso não encontrado');
         }
 
-        const organization = await this.organizationRepository.create({
+        const existentOrganization = await this.organizationRepository.findByUserAndDocumentAndLevel(user_id, document_id, level_id);
+        if (existentOrganization) {
+            throw new BadRequestError('Vínculo já existente');
+        }
+
+        await this.organizationRepository.create({
             user_id,
             document_id,
             level_id
         });
 
         return {
-            user: organization.user,
-            document: organization.document,
-            level: organization.level,
+            user: {
+                id: existentUser.id,
+                name: existentUser.name,
+                email: existentUser.email,
+            },
+            document: existentDocument,
+            level: existentLevel,
         };
     }
 }

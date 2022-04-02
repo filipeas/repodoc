@@ -6,6 +6,8 @@ import { IDocumentRepository } from '@domain/documents/repositories/IDocumentRep
 import { TypeOrmDocumentRepository } from '@domain/documents/infra/typeorm/repositories/TypeOrmDocumentRepository';
 import { ILevelRepository } from '@domain/levels/repositories/ILevelRepository';
 import { TypeOrmLevelRepository } from '@domain/levels/infra/typeorm/repository/TypeOrmLevelRepository';
+import { IOrganizationRepository } from '@domain/organizations/repositories/IOrganizationRepository';
+import { TypeOrmOrganizationRepository } from '@domain/organizations/infra/typeorm/repositories/TypeOrmOrganizationRepository';
 
 container.registerSingleton<IUserRepository>(
     'UserRepository',
@@ -20,4 +22,9 @@ container.registerSingleton<IDocumentRepository>(
 container.registerSingleton<ILevelRepository>(
     'LevelRepository',
     TypeOrmLevelRepository,
+);
+
+container.registerSingleton<IOrganizationRepository>(
+    'OrganizationRepository',
+    TypeOrmOrganizationRepository,
 );

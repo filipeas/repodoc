@@ -8,7 +8,6 @@ import { Router } from 'express';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import validate from '../middlewares/validation';
 import { CreateOrganizationSchema } from '../validations/CreateOrganizationSchema';
-import { DeleteOrganizationSchema } from '../validations/DeleteOrganizationSchema';
 
 const organizationsRouter = Router();
 
@@ -22,6 +21,6 @@ organizationsRouter.use(ensureAuthenticated);
 organizationsRouter.post('/', validate(CreateOrganizationSchema), linkController.handle);
 organizationsRouter.get('/user/:user_id', listDocumentByUserIDController.handle);
 organizationsRouter.get('/document/:document_id', listUserByDocumentIDController.handle);
-organizationsRouter.delete('/user/:user_id/document/:document_id', validate(DeleteOrganizationSchema), unlinkController.handle);
+organizationsRouter.delete('/user/:user_id/document/:document_id', unlinkController.handle);
 
 export { organizationsRouter };

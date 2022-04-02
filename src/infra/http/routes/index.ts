@@ -21,6 +21,6 @@ routes.use('/auth', authenticateRouter);
 routes.use('/users', usersRouter);
 routes.use('/documents', documentsRouter);
 routes.use('/levels', levelsRouter);
-routes.use('/organization', organizationsRouter);
+routes.use('/organizations', organizationsRouter);
 
 export { routes };

@@ -20,12 +20,12 @@ export class UnlinkUseCase {
 
     async run({ user_id, document_id }: IRequestDeleteUnlink): Promise<void> {
         const existentUser = await this.userRepository.findById(user_id);
-        if (existentUser) {
+        if (!existentUser) {
             throw new BadRequestError('Usuário não encontrado');
         }
 
         const existentDocument = await this.documentRepository.findById(document_id);
-        if (existentDocument) {
+        if (!existentDocument) {
             throw new BadRequestError('Documento não encontrado');
         }
 

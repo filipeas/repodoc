@@ -18,7 +18,7 @@ export class ListDocumentByUserIDUseCase {
 
     async run({ user_id }: IRequestListDocumentByUserID): Promise<Organization[]> {
         const user = await this.userRepository.findById(user_id);
-        if (user) {
+        if (!user) {
             throw new BadRequestError('Usuário não encontrado');
         }
 

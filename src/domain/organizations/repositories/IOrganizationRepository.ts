@@ -12,5 +12,10 @@ export interface IOrganizationRepository {
         user_id: string,
         document_id: string,
     ): Promise<Organization | undefined>;
+    findByUserAndDocumentAndLevel(
+        user_id: string,
+        document_id: string,
+        level_id: string,
+    ): Promise<Organization | undefined>;
     delete(organization: Organization): Promise<void>;
 }
