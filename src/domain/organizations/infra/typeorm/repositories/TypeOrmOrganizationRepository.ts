@@ -12,25 +12,39 @@ export class TypeOrmOrganizationRepository implements IOrganizationRepository {
         this.repository = getRepository(Organization);
     }
 
-    async findById(id: string, relations = []): Promise<User | undefined> {
+    async create(data: ICreateOrganizationDto): Promise<Organization> {
+        const user = this.repository.create(data);
+        await this.repository.save(user);
+        return user;
+    }
+
+    async findByUserId(user_id: string, relations = ['user']): Promise<Organization[]> {
+        return await this.repository.find({
+            where: [{ user_id, relations }],
+        });
+    }
+
+    async findByDocumentId(document_id: string, relations = ['document']): Promise<Organization[]> {
+        return await this.repository.find({
+            where: [{ document_id, relations }],
+        });
+    }
+
+    async findByUserAndDocument(user_id: string, document_id: string): Promise<Organization | undefined> {
         return await this.repository.findOne({
-            where: [{ id, relations }],
+            where: [{ user_id, document_id }],
         });
     }
 
     async delete(organization: Organization): Promise<void> {
-        const findUser = await this.repository.findOne(organization.id, {
+        const findOrganization = await this.repository.findOne(organization.id, {
             relations: [],
         });
 
-        if (!findUser) {
+        if (!findOrganization) {
             throw new Error('Error');
         }
 
-        await this.repository.softRemove(findUser, {
-            data: {
-                deleted_at: 'deleted',
-            },
-        });
+        await this.repository.delete(findOrganization);
     }
 }

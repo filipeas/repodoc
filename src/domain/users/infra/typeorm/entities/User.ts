@@ -1,32 +1,40 @@
+import { Organization } from '@domain/organizations/infra/typeorm/entities/Organization';
 import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('increment')
-  id!: string;
+    @PrimaryGeneratedColumn('increment')
+    id!: string;
 
-  @Column()
-  name!: string;
+    @OneToMany(() => Organization, organization => organization.user, {
+        onDelete: 'CASCADE',
+        cascade: true,
+    })
+    organization!: Organization[];
 
-  @Column()
-  email!: string;
+    @Column()
+    name!: string;
 
-  @Column()
-  password!: string;
+    @Column()
+    email!: string;
 
-  @CreateDateColumn()
-  created_at!: Date;
+    @Column()
+    password!: string;
 
-  @UpdateDateColumn()
-  updated_at!: Date;
+    @CreateDateColumn()
+    created_at!: Date;
 
-  @DeleteDateColumn()
-  deleted_at?: Date;
+    @UpdateDateColumn()
+    updated_at!: Date;
+
+    @DeleteDateColumn()
+    deleted_at?: Date;
 }
