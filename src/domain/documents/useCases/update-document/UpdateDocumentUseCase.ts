@@ -7,6 +7,7 @@ import { IRequestCreateDocument } from '@domain/documents/request/IRequestCreate
 import { IResponseCreateDocument } from '@domain/documents/response/IResponseCreateDocument';
 import { generateSlug } from '@infra/utils/generateSlug';
 import { IRequestUpdateDocument } from '@domain/documents/request/IRequestUpdateDocument';
+import { NotFoundError } from '@infra/http/errors/NotFoundError';
 
 @injectable()
 export class UpdateDocumentUseCase {
@@ -23,11 +24,10 @@ export class UpdateDocumentUseCase {
         privacy,
     }: IRequestUpdateDocument): Promise<IResponseCreateDocument> {
         const slug = generateSlug(title);
-        const document = await this.documentRepository.findByIDAndSlug(id, slug);
-        if (document) {
-            throw new BadRequestError(
-                'Documento já cadastrado com esse título',
-            );
+        const document = await this.documentRepository.findById(id);
+
+        if (!document) {
+            throw new BadRequestError('Documento não encontrado');
         }
 
         Object.assign(document, {
@@ -38,6 +38,6 @@ export class UpdateDocumentUseCase {
             privacy,
         });
 
-        return await this.documentRepository.save(document!);
+        return await this.documentRepository.save(document);
     }
 }

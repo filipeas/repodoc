@@ -12,7 +12,7 @@ export class CreateDocumentUseCase {
     constructor(
         @inject('DocumentRepository')
         private documentRepository: IDocumentRepository,
-    ) {}
+    ) { }
 
     async run({
         title,

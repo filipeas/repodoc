@@ -10,13 +10,10 @@ export class DeleteDocumentUseCase {
     constructor(
         @inject('DocumentRepository')
         private documentRepository: IDocumentRepository,
-    ) {}
+    ) { }
 
-    async run({ id, slug }: IRequestDeleteDocument): Promise<void> {
-        const document = await this.documentRepository.findByIDAndSlug(
-            id,
-            slug,
-        );
+    async run({ id }: IRequestDeleteDocument): Promise<void> {
+        const document = await this.documentRepository.findById(id);
         if (!document) {
             throw new BadRequestError('Documento inexistente');
         }
