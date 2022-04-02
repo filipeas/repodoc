@@ -13,7 +13,7 @@ export class ListUserByIDUseCase {
   ) {}
 
   async run({ id }: IRequestDeleteUser): Promise<IResponseListAllUser> {
-    const user = await this.userRepository.findById(id, ['role']);
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new BadRequestError('Usuário não encontrado');
