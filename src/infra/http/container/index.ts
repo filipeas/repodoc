@@ -8,6 +8,8 @@ import { ILevelRepository } from '@domain/levels/repositories/ILevelRepository';
 import { TypeOrmLevelRepository } from '@domain/levels/infra/typeorm/repository/TypeOrmLevelRepository';
 import { IOrganizationRepository } from '@domain/organizations/repositories/IOrganizationRepository';
 import { TypeOrmOrganizationRepository } from '@domain/organizations/infra/typeorm/repositories/TypeOrmOrganizationRepository';
+import { IFolderRepository } from '@domain/folders/repositories/IFolderRepository';
+import { TypeOrmFolderRepository } from '@domain/folders/infra/typeorm/repositories/TypeOrmFolderRepository';
 
 container.registerSingleton<IUserRepository>(
     'UserRepository',
@@ -27,4 +29,9 @@ container.registerSingleton<ILevelRepository>(
 container.registerSingleton<IOrganizationRepository>(
     'OrganizationRepository',
     TypeOrmOrganizationRepository,
+);
+
+container.registerSingleton<IFolderRepository>(
+    'FolderRepository',
+    TypeOrmFolderRepository,
 );
