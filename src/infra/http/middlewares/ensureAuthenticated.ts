@@ -33,6 +33,7 @@ export async function ensureAuthenticated(
 
         next();
     } catch (error) {
+        console.log(error)
         throw new UnauthozitedError('Token inválido');
     }
 }

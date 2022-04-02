@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '@domain/users/repositories/IUserRepository';
 import { BadRequestError } from '@infra/http/errors/BadRequestError';
 import { IRequestUpdateUser } from '@domain/users/request/IRequestUpdateUser';
+import { IResponseCreateUser } from '@domain/users/response/IResponseCreateUser';
 
 @injectable()
 export class UpdateUserUseCase {
@@ -11,17 +12,22 @@ export class UpdateUserUseCase {
         private userRepository: IUserRepository,
     ) { }
 
-    async run({ id, name }: IRequestUpdateUser): Promise<void> {
-        const existentUser = await this.userRepository.findById(id);
+    async run({ id, name }: IRequestUpdateUser): Promise<IResponseCreateUser> {
+        const user = await this.userRepository.findById(id);
 
-        if (!existentUser) {
+        if (!user) {
             throw new BadRequestError('Usuário não encontrado');
         }
 
-        Object.assign(existentUser, {
+        Object.assign(user, {
             name,
         });
 
-        await this.userRepository.save(existentUser);
+        await this.userRepository.save(user);
+
+        return {
+            name: user.name,
+            email: user.email,
+        };
     }
 }
