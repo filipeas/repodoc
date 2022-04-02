@@ -27,7 +27,7 @@ export class AuthUserUseCase {
             throw new BadRequestError('E-mail ou senha incorreta');
         }
 
-        const token = sign({}, 'd6d7cbf35caac567a91718d2d7a135e0', {
+        const token = sign({}, String(process.env.KEY_AUTH), {
             subject: String(user.id),
             expiresIn: '1d',
         });
