@@ -18,9 +18,17 @@ const deleteDocumentController = new DeleteDocumentController();
 
 // private routes
 documentsRouter.use(ensureAuthenticated);
-documentsRouter.post('/', validate(CreateDocumentSchema), createDocumentController.handle);
+documentsRouter.post(
+    '/',
+    validate(CreateDocumentSchema),
+    createDocumentController.handle,
+);
 documentsRouter.get('/id/:id', listDocumentByIDController.handle);
-documentsRouter.put('/id/:id', validate(UpdateDocumentSchema), updateDocumentController.handle);
+documentsRouter.put(
+    '/id/:id',
+    validate(UpdateDocumentSchema),
+    updateDocumentController.handle,
+);
 documentsRouter.delete('/id/:id', deleteDocumentController.handle);
 
 export { documentsRouter };
