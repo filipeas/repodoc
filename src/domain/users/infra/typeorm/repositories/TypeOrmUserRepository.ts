@@ -24,7 +24,7 @@ export class TypeOrmUserRepository implements IUserRepository {
 
     async findById(id: string, relations = []): Promise<User | undefined> {
         return await this.repository.findOne({
-            where: [{ id }, { relations }]
+            where: [{ id, relations }]
         });
     }
 

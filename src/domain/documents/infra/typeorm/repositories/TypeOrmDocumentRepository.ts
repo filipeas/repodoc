@@ -20,7 +20,7 @@ export class TypeOrmDocumentRepository implements IDocumentRepository {
 
     async findById(id: string, relations = []): Promise<Document | undefined> {
         return this.repository.findOne({
-            where: [{ id }, { relations }],
+            where: [{ id, relations }],
         });
     }
 
@@ -29,7 +29,7 @@ export class TypeOrmDocumentRepository implements IDocumentRepository {
         relations = [],
     ): Promise<Document | undefined> {
         return this.repository.findOne({
-            where: [{ slug }, { relations }],
+            where: [{ slug, relations }],
         });
     }
 

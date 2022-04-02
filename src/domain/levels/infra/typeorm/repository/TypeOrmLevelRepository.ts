@@ -17,7 +17,7 @@ export class TypeOrmLevelRepository implements ILevelRepository {
 
     async findById(id: string, relations = []): Promise<Level | undefined> {
         return await this.repository.findOne({
-            where: [{ id }, { relations }]
+            where: { id }, relations
         });
     }
 }
