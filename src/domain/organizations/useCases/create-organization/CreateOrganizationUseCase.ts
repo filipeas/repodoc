@@ -1,11 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IUserRepository } from '@domain/users/repositories/IUserRepository';
-
 import { BadRequestError } from '@infra/http/errors/BadRequestError';
 import { IOrganizationRepository } from '@domain/organizations/repositories/IOrganizationRepository';
-import { IDocumentRepository } from '@domain/documents/repositories/IDocumentRepository';
-import { ILevelRepository } from '@domain/levels/repositories/ILevelRepository';
 import { IRequestCreateOrganization } from '@domain/organizations/request/IRequestCreateOrganization';
 import { IResponseCreateOrganization } from '@domain/organizations/response/IResponseCreateOrganization';
 import { generateSlug } from '@infra/utils/generateSlug';

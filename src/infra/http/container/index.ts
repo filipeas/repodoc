@@ -10,6 +10,8 @@ import { IOrganizationRepository } from '@domain/organizations/repositories/IOrg
 import { TypeOrmOrganizationRepository } from '@domain/organizations/infra/typeorm/repositories/TypeOrmOrganizationRepository';
 import { IFolderRepository } from '@domain/folders/repositories/IFolderRepository';
 import { TypeOrmFolderRepository } from '@domain/folders/infra/typeorm/repositories/TypeOrmFolderRepository';
+import { ICollaboratorRepository } from '@domain/collaborators/repositories/ICollaboratorRepository';
+import { TypeOrmCollaborator } from '@domain/collaborators/infra/typeorm/repositories/TypeOrmCollaborator';
 
 container.registerSingleton<IUserRepository>(
     'UserRepository',
@@ -29,6 +31,11 @@ container.registerSingleton<ILevelRepository>(
 container.registerSingleton<IOrganizationRepository>(
     'OrganizationRepository',
     TypeOrmOrganizationRepository,
+);
+
+container.registerSingleton<ICollaboratorRepository>(
+    'CollaboratorRepository',
+    TypeOrmCollaborator,
 );
 
 container.registerSingleton<IFolderRepository>(
