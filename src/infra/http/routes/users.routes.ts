@@ -1,5 +1,7 @@
 import { CreateUserController } from '@domain/users/useCases/create-user/CreateUserController';
 import { DeleteUserController } from '@domain/users/useCases/delete-user/DeleteUserController';
+import { ListCollaborationsController } from '@domain/users/useCases/list-collaborations/ListCollaborationsController';
+import { ListMyOrganizationController } from '@domain/users/useCases/list-my-organizations/ListMyOrganizationController';
 import { ListUserByEmailController } from '@domain/users/useCases/list-user-by-email/ListUserByEmailController';
 import { ListUserByIDController } from '@domain/users/useCases/list-user-by-id/ListUserByIDController';
 import { UpdatePasswordController } from '@domain/users/useCases/update-password/UpdatePasswordController';
@@ -15,13 +17,12 @@ import { UpdateUserSchema } from '../validations/UpdateUserSchema';
 const usersRouter = Router();
 
 const createUserController = new CreateUserController();
-
 const listUserByEmail = new ListUserByEmailController();
 const listUserByID = new ListUserByIDController();
-
+const listCollaborationsController = new ListCollaborationsController();
+const listMyOrganizationController = new ListMyOrganizationController();
 const updateUser = new UpdateUserController();
 const updatePassword = new UpdatePasswordController();
-
 const deleteUserController = new DeleteUserController();
 
 // public routes
@@ -31,6 +32,8 @@ usersRouter.post('/', validate(CreateUserSchema), createUserController.handle);
 usersRouter.use(ensureAuthenticated);
 usersRouter.get('/email/:email', listUserByEmail.handle);
 usersRouter.get('/id/:id', listUserByID.handle);
+usersRouter.get('/collaborations', listCollaborationsController.handle);
+usersRouter.get('/my/collaborations', listMyOrganizationController.handle);
 usersRouter.put('/id/:id', validate(UpdateUserSchema), updateUser.handle);
 usersRouter.put('/id/:id/edit/password', validate(UpdatePasswordUserSchema), updatePassword.handle);
 usersRouter.delete('/id/:id', deleteUserController.handle);
