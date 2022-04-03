@@ -1,3 +1,4 @@
+import { Collaborator } from '@domain/collaborators/infra/typeorm/entities/Collaborator';
 import { Organization } from '@domain/organizations/infra/typeorm/entities/Organization';
 import {
     Column,
@@ -11,11 +12,11 @@ export class Level {
     @PrimaryGeneratedColumn('increment')
     id!: string;
 
-    @OneToMany(() => Organization, organization => organization.level, {
+    @OneToMany(() => Collaborator, colllaborator => colllaborator.level, {
         onDelete: 'CASCADE',
         cascade: true,
     })
-    organization!: Organization[];
+    collaborator!: Collaborator[];
 
     @Column()
     title!: string;

@@ -3,19 +3,8 @@ import { Organization } from '../infra/typeorm/entities/Organization';
 
 export interface IOrganizationRepository {
     create(data: ICreateOrganizationDto): Promise<Organization>;
-    findByUserId(user_id: string, relations?: string[]): Promise<Organization[]>;
-    findByDocumentId(
-        document_id: string,
-        relations?: string[],
-    ): Promise<Organization[]>;
-    findByUserAndDocument(
-        user_id: string,
-        document_id: string,
-    ): Promise<Organization | undefined>;
-    findByUserAndDocumentAndLevel(
-        user_id: string,
-        document_id: string,
-        level_id: string,
-    ): Promise<Organization | undefined>;
+    findById(id: string, relations?: string[]): Promise<Organization | undefined>;
+    findByUserAndSlug(user_id: string, slug: string, relations?: string[]): Promise<Organization | undefined>;
+    save(organization: Organization): Promise<Organization>;
     delete(organization: Organization): Promise<void>;
 }

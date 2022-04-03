@@ -18,24 +18,16 @@ export class TypeOrmOrganizationRepository implements IOrganizationRepository {
         return user;
     }
 
-    async findByUserId(user_id: string, relations = ['user']): Promise<Organization[]> {
-        return await this.repository.find({
-            where: { user_id }, relations
-        });
+    async findById(id: string, relations = []): Promise<Organization | undefined> {
+        return await this.repository.findOne(id, { relations });
     }
 
-    async findByDocumentId(document_id: string, relations = ['document']): Promise<Organization[]> {
-        return await this.repository.find({
-            where: { document_id }, relations
-        });
+    async findByUserAndSlug(user_id: string, slug: string, relations = []): Promise<Organization | undefined> {
+        return await this.repository.findOne({ user_id, slug: slug });
     }
 
-    async findByUserAndDocument(user_id: string, document_id: string): Promise<Organization | undefined> {
-        return await this.repository.findOne({ user_id: user_id, document_id: document_id });
-    }
-
-    async findByUserAndDocumentAndLevel(user_id: string, document_id: string, level_id: string): Promise<Organization | undefined> {
-        return await this.repository.findOne({ user_id: user_id, document_id: document_id, level_id: level_id });
+    async save(organization: Organization): Promise<Organization> {
+        return await this.repository.save(organization);
     }
 
     async delete(organization: Organization): Promise<void> {

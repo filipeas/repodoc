@@ -36,12 +36,6 @@ export class CreateCollaborators1648985399457 implements MigrationInterface {
                         default: 'now()',
                         isNullable: false,
                     },
-                    {
-                        name: 'updated_at',
-                        type: 'timestamp',
-                        default: 'now()',
-                        isNullable: false,
-                    },
                 ],
             }),
         );

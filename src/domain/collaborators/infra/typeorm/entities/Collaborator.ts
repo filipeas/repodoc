@@ -1,18 +1,27 @@
+import { Level } from '@domain/levels/infra/typeorm/entities/Level';
 import { Organization } from '@domain/organizations/infra/typeorm/entities/Organization';
+import { User } from '@domain/users/infra/typeorm/entities/User';
 import {
     Column,
     CreateDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
-    UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('documents')
-export class Document {
+@Entity('collaborator')
+export class Collaborator {
     @PrimaryGeneratedColumn('increment')
     id!: string;
+
+    @Column()
+    user_id!: string;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    user!: User;
 
     @Column()
     organization_id!: string;
@@ -22,23 +31,12 @@ export class Document {
     organization!: Organization;
 
     @Column()
-    title!: string;
+    level_id!: string;
 
-    @Column()
-    slug!: string;
-
-    @Column()
-    description!: string;
-
-    @Column()
-    status!: boolean;
-
-    @Column()
-    privacy!: boolean;
+    @ManyToOne(() => Level)
+    @JoinColumn({ name: 'level_id' })
+    level!: Level;
 
     @CreateDateColumn()
     created_at!: Date;
-
-    @UpdateDateColumn()
-    updated_at!: Date;
 }
