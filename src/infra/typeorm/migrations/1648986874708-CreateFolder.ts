@@ -1,10 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export class CreateDocument1648768406329 implements MigrationInterface {
+export class CreateFolder1648986874708 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'documents',
+                name: 'folders',
                 columns: [
                     {
                         name: 'id',
@@ -15,8 +16,8 @@ export class CreateDocument1648768406329 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'slug',
-                        type: 'varchar',
+                        name: 'document_id',
+                        type: 'int',
                         isNullable: false,
                     },
                     {
@@ -25,18 +26,13 @@ export class CreateDocument1648768406329 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'description',
+                        name: 'slug',
                         type: 'varchar',
-                        isNullable: true,
-                    },
-                    {
-                        name: 'status',
-                        type: 'boolean',
                         isNullable: false,
                     },
                     {
-                        name: 'privacy',
-                        type: 'boolean',
+                        name: 'description',
+                        type: 'varchar',
                         isNullable: false,
                     },
                     {
@@ -54,9 +50,26 @@ export class CreateDocument1648768406329 implements MigrationInterface {
                 ],
             }),
         );
+
+        await queryRunner.createForeignKey(
+            'folders',
+            new TableForeignKey({
+                name: 'FKfoldersdocument',
+                referencedTableName: 'documents',
+                referencedColumnNames: ['id'],
+                columnNames: ['document_id'],
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('documents');
+        await queryRunner.dropForeignKey(
+            'folders',
+            'FKfoldersdocument',
+        );
+        await queryRunner.dropTable('folders');
     }
+
 }
