@@ -1,6 +1,7 @@
 import { response, Router } from 'express';
 import { authenticateRouter } from './authenticate.routes';
 import { documentsRouter } from './documents.routes';
+import { foldersRouter } from './folders.routes';
 import { levelsRouter } from './levels.routes';
 import { organizationsRouter } from './organizations.routes';
 import { usersRouter } from './users.routes';
@@ -22,5 +23,6 @@ routes.use('/users', usersRouter);
 routes.use('/documents', documentsRouter);
 routes.use('/levels', levelsRouter);
 routes.use('/organizations', organizationsRouter);
+routes.use('/folders', foldersRouter);
 
 export { routes };

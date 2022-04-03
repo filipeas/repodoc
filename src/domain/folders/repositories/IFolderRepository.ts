@@ -9,6 +9,7 @@ export interface IFolderRepository {
         document_id: string,
         relations?: string[],
     ): Promise<Folder[]>;
+    findByIdAndSlug(id: string, slug: string): Promise<Folder | undefined>;
     save(folder: Folder): Promise<Folder>;
     delete(folder: Folder): Promise<void>;
 }

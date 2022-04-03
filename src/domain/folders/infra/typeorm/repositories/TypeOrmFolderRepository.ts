@@ -31,6 +31,10 @@ export class TypeOrmFolderRepository implements IFolderRepository {
         });
     }
 
+    async findByIdAndSlug(id: string, slug: string): Promise<Folder | undefined> {
+        return await this.repository.findOne({ id: id, slug: slug });
+    }
+
     async save(folder: Folder): Promise<Folder> {
         return await this.repository.save(folder);
     }

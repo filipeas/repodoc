@@ -16,15 +16,9 @@ export class UpdateFolderUseCase {
 
     async run({ id, title, description }: IRequestUpdateFolder): Promise<IResponseCreateFolder> {
         const slug = generateSlug(title);
-        const folder = await this.folderRepository.findBySlug(slug);
+        const folder = await this.folderRepository.findById(id);
 
         if (!folder) {
-            throw new NotFoundError(
-                'Pasta não encotrada',
-            );
-        }
-
-        if (folder && folder.id !== id) {
             throw new BadRequestError(
                 'Pasta com nome já cadastrado',
             );
@@ -35,6 +29,8 @@ export class UpdateFolderUseCase {
             title,
             description,
         });
+
+        await this.folderRepository.save(folder);
 
         return {
             id: folder.title,

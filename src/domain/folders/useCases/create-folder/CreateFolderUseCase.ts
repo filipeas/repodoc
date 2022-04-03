@@ -13,7 +13,7 @@ export class CreateFolderUseCase {
         private folderRepository: IFolderRepository,
     ) { }
 
-    async run({ title, description }: IRequestCreateFolder): Promise<IResponseCreateFolder> {
+    async run({ document_id, title, description }: IRequestCreateFolder): Promise<IResponseCreateFolder> {
         const slug = generateSlug(title);
         const existentFolder = await this.folderRepository.findBySlug(slug);
 
@@ -24,6 +24,7 @@ export class CreateFolderUseCase {
         }
 
         const folder = await this.folderRepository.create({
+            document_id,
             slug,
             title,
             description,
