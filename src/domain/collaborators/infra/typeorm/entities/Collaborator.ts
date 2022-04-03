@@ -10,7 +10,7 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('collaborator')
+@Entity('collaborators')
 export class Collaborator {
     @PrimaryGeneratedColumn('increment')
     id!: string;

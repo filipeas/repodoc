@@ -18,6 +18,10 @@ export class TypeOrmOrganizationRepository implements IOrganizationRepository {
         return user;
     }
 
+    async findByID(id: string): Promise<Organization | undefined> {
+        return this.repository.findOne({ id });
+    }
+
     async findByUserAndOrganizationId(user_id: string, organization_id: string, relations = []): Promise<Organization | undefined> {
         return await this.repository.findOne({ user_id, id: organization_id });
     }

@@ -16,6 +16,6 @@ const updateOrganizationController = new UpdateOrganizationController();
 organizationsRouter.use(ensureAuthenticated);
 organizationsRouter.post('/', validate(CreateOrganizationSchema), createOrganizationController.handle);
 organizationsRouter.get('/user/:user_id', listOrganizationByUserIDController.handle);
-organizationsRouter.delete('/organization/:organization_id', validate(CreateOrganizationSchema), updateOrganizationController.handle);
+organizationsRouter.put('/organization/:organization_id', validate(CreateOrganizationSchema), updateOrganizationController.handle);
 
 export { organizationsRouter };
