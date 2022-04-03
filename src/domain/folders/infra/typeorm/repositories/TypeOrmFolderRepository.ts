@@ -21,6 +21,10 @@ export class TypeOrmFolderRepository implements IFolderRepository {
         return await this.repository.findOne(id, { relations });
     }
 
+    async findBySlug(slug: string, relations = []): Promise<Folder | undefined> {
+        return await this.repository.findOne(slug, { relations });
+    }
+
     async findByDocumentId(document_id: string, relations = []): Promise<Folder[]> {
         return await this.repository.find({
             where: { document_id: document_id }, relations
