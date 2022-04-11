@@ -2,6 +2,7 @@ import { Collaborator } from '@domain/collaborators/infra/typeorm/entities/Colla
 import { Document } from '@domain/documents/infra/typeorm/entities/Document';
 import { Folder } from '@domain/folders/infra/typeorm/entities/Folder';
 import { Organization } from '@domain/organizations/infra/typeorm/entities/Organization';
+import { ITypeRequestProps } from '@domain/routes/dtos/ITypeRequestProps';
 import {
     Column,
     Entity,
@@ -42,9 +43,6 @@ export class Route {
     @Column()
     url!: string;
 
-    @Column()
-    type_request!: string;
-
-    @Column()
-    level!: number;
+    @Column({ type: 'enum', enum: ITypeRequestProps })
+    type_request!: ITypeRequestProps;
 }

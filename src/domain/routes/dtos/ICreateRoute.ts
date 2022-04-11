@@ -1,3 +1,5 @@
+import { ITypeRequestProps } from "./ITypeRequestProps";
+
 export interface ICreateRoute {
     document_id: string;
     folder_id: string;
@@ -5,5 +7,5 @@ export interface ICreateRoute {
     slug: string;
     description: string;
     url: string;
-    type_request: string;
+    type_request: ITypeRequestProps;
 }
