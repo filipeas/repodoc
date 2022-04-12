@@ -1,17 +1,17 @@
-import { Document } from '@domain/documents/infra/typeorm/entities/Document';
+import { ITypeBodyProps } from '@domain/bodies/dtos/ITypeBodyProps';
 import { Folder } from '@domain/folders/infra/typeorm/entities/Folder';
-import { ITypeRequestProps } from '@domain/routes/dtos/ITypeRequestProps';
 import {
     Column,
+    CreateDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('routes')
-export class Route {
+@Entity('bodies')
+export class Body {
     @PrimaryGeneratedColumn('increment')
     id!: string;
 
@@ -39,8 +39,14 @@ export class Route {
     description!: string;
 
     @Column()
-    url!: string;
+    type!: ITypeBodyProps;
 
-    @Column({ type: 'enum', enum: ITypeRequestProps })
-    type_request!: ITypeRequestProps;
+    @Column()
+    required!: boolean;
+
+    @CreateDateColumn()
+    created_at!: Date;
+
+    @UpdateDateColumn()
+    updated_at!: Date;
 }
