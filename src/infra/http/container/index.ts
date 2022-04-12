@@ -12,6 +12,8 @@ import { IFolderRepository } from '@domain/folders/repositories/IFolderRepositor
 import { TypeOrmFolderRepository } from '@domain/folders/infra/typeorm/repositories/TypeOrmFolderRepository';
 import { ICollaboratorRepository } from '@domain/collaborators/repositories/ICollaboratorRepository';
 import { TypeOrmCollaborator } from '@domain/collaborators/infra/typeorm/repositories/TypeOrmCollaborator';
+import { TypeOrmRouteRepository } from '@domain/routes/infra/typeorm/repositories/TypeOrmRouteRepository';
+import { IRouteRepository } from '@domain/routes/repositories/IRouteRepository';
 
 container.registerSingleton<IUserRepository>(
     'UserRepository',
@@ -41,4 +43,9 @@ container.registerSingleton<ICollaboratorRepository>(
 container.registerSingleton<IFolderRepository>(
     'FolderRepository',
     TypeOrmFolderRepository,
+);
+
+container.registerSingleton<IRouteRepository>(
+    'RouteRepository',
+    TypeOrmRouteRepository,
 );

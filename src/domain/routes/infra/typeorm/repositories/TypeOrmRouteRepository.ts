@@ -33,6 +33,10 @@ export class TypeOrmRouteRepository implements IRouteRepository {
         });
     }
 
+    async findRouteByDocumentIDFolderIDAndSlug(document_id: string, folder_id: string, slug: string): Promise<Route | undefined> {
+        return this.repository.findOne({ document_id: document_id, folder_id: folder_id, slug: slug });
+    }
+
     async save(route: Route): Promise<Route> {
         return await this.repository.save(route);
     }

@@ -5,6 +5,7 @@ import { documentsRouter } from './documents.routes';
 import { foldersRouter } from './folders.routes';
 import { levelsRouter } from './levels.routes';
 import { organizationsRouter } from './organizations.routes';
+import { routesRouter } from './routes.routes';
 import { usersRouter } from './users.routes';
 
 const routes = Router();
@@ -26,5 +27,6 @@ routes.use('/collaborators', collaboratorsRouter);
 routes.use('/documents', documentsRouter);
 routes.use('/levels', levelsRouter);
 routes.use('/folders', foldersRouter);
+routes.use('/routes', routesRouter);
 
 export { routes };
