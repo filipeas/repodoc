@@ -3,14 +3,14 @@ on:
     pull_request:
         branches:
             - master
-jobs:
+job:
     web-deploy:
         name: Deploy develop
         runs-on: ubuntu-latest
         steps:
         - name: Sincronizando códigos do repositório
           uses: actions/checkout@v2
-
+job:
     heroku-deploy:
         runs-on: ubuntu-latest
         steps:
