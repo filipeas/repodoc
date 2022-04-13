@@ -1,20 +1,12 @@
 name: Pull Request de alterações para branch de produção
 on:
-    pull_request_target:
+    pull_request:
         branches:
             - master
-        types: [closed]
-
 jobs:
-    heroku-deploy:
-        if: github.event.pull_request.merged == true
+    web-deploy:
+        name: Deploy develop
         runs-on: ubuntu-latest
         steps:
-        - name: Check out repository
+        - name: Sincronizando códigos do repositório
           uses: actions/checkout@v2
-        - name: Deploy to Heroku
-          uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-            heroku_email: ${{ secrets.HEROKU_EMAIL }}
