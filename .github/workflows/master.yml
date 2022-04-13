@@ -10,12 +10,3 @@ jobs:
         steps:
         - name: Sincronizando códigos do repositório
           uses: actions/checkout@v2
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v1
-        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-            with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "repodoc" #Must be unique in Heroku
-            heroku_email: "felipealvessampaio@hotmail.com"
