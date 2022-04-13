@@ -1,0 +1,12 @@
+name: Pull Request de alterações para branch de produção
+on:
+    pull_request:
+        branches:
+            - master
+jobs:
+    web-deploy:
+        name: Deploy develop
+        runs-on: ubuntu-latest
+        steps:
+        - name: Sincronizando códigos do repositório
+          uses: actions/checkout@v2
