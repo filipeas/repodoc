@@ -3,6 +3,7 @@ on:
     pull_request:
         branches:
             - master
+        types: [closed]
 jobs:
     web-deploy:
         name: Deploy develop
@@ -10,3 +11,13 @@ jobs:
         steps:
         - name: Sincronizando códigos do repositório
           uses: actions/checkout@v2
+    heroku-deploy:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.merged == true
+        steps:
+        - uses: actions/checkout@v2
+        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+            heroku_email: ${{secrets.HEROKU_EMAIL}}
