@@ -7,33 +7,48 @@
 
 ## Como rodar em localhost
 O projeto possui uma instância no docker. Por isso, basta clonar o projeto e executar a instalação do mesmo no diretório com os seguintes comandos:
+
 ``` yarn ```
+
 Depois tenha certeza de ter o Docker instalado na sua máquina. Após isso execute:
+
 ``` docker-compose up ```
 
 ## Como fazer deploy no heroku
 1. Faça login do container:
+
 ``` heroku container:login ```
 2. Acesse o diretório do projeto e execute:
+
 ``` heroku create ```
 2. (opcional) Renomeie o nome do app:
-``` heroku git:remote -a NOME_DO_APP_CRIADO ```
-``` heroku apps:rename repodoc ```
+
+```
+heroku git:remote -a NOME_DO_APP_CRIADO
+heroku apps:rename repodoc
+```
+
 3. Buildar a imagem e dar push do container:
+
 ``` heroku container:push web ```
 4. Fazer release da imagem:
+
 ``` heroku container:release web ```
 5. (opcional) Abra outro terminal e verifique o processo no heroku:
+
 ``` heroku logs --tail ```
 6. Se tudo der certo, abra o navegador na página do projeto:
+
 ``` heroku open ```
 
 Após isso, basta ir no app criado na conta do heroku e criar um banco de dados postgres na conta. Acesse a aba ``` resources ``` e adicione o heroku-postgres do app.
 
 Após isso, pegue as credenciais do banco de dados e vá até a aba ``` settings ``` no app e clique em Reveal Config Vars. Adicione todas as variáveis de ambiente do .env do projeto nessa parte, e lembre-se de colocar os dados do banco de dados que você pegou na criação do banco no passo atrás.
 
-* OBS1: Pode ocorrer um erro com ssl. Então execute o comando abaixo para corrigir:
+* OBS1: Pode ocorrer um erro com ssl. Então execute o comando abaixo para corrigir (antes do passo 4. Isso vai forçar o app no heroku não verificar ssl):
+
 ``` heroku config:set PGSSLMODE=no-verify ```
+
 [Mais informações desse erro no link a seguir](https://catalins.tech/nodejs-postgresql-heroku-error-no-pghbaconf-entry-for-host-ssl-off)
 
 * OBS2: O heroku só olha o arquivo Dockerfile, então ele deve estar bem configurado no momento da implantação.
