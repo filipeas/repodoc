@@ -40,6 +40,11 @@ Após isso, pegue as credenciais do banco de dados e vá até a aba ``` settings
 
 * OBS3: O heroku usa uma porta aleatória toda vez quando executa um release para o app. Então é necessário deixar o arquivo Dockfile configurado para escutar a porta $PORT com o host 0.0.0.0. Além disso, no arquivo server.js, precisa configurar o .listen para escutar primeiro a porta do heroku e depois a porta do .env. Dessa forma é possível manter essa configuração para que rode tanto no heroku quanto em localhost.
 
+* OBS4: Para configurar o deploy com github actions é necessário:
+1. criar arquivo heroku.yml e apontar arquivo dockerfile
+2. configurar workflow (nesse projeto o workflow está configurado para fazer deploy para o heroku apenas na branch master)
+3. conectar o repositório desse projeto no app criado no heroku, na aba Deploy. É importante marcar a branch master e ativar deploy automático.
+
 ## Quer contribuir?
 Tem alguma melhoria para adicionar no projeto?
 1. Faça um fork do projeto e submeta suas alterações!
