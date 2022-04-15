@@ -18,9 +18,11 @@ Depois tenha certeza de ter o Docker instalado na sua máquina. Após isso execu
 1. Faça login do container:
 
 ``` heroku container:login ```
+
 2. Acesse o diretório do projeto e execute:
 
 ``` heroku create ```
+
 2. (opcional) Renomeie o nome do app:
 
 ```
@@ -31,12 +33,15 @@ heroku apps:rename repodoc
 3. Buildar a imagem e dar push do container:
 
 ``` heroku container:push web ```
+
 4. Fazer release da imagem:
 
 ``` heroku container:release web ```
+
 5. (opcional) Abra outro terminal e verifique o processo no heroku:
 
 ``` heroku logs --tail ```
+
 6. Se tudo der certo, abra o navegador na página do projeto:
 
 ``` heroku open ```
