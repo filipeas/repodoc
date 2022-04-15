@@ -1,5 +1,6 @@
 # REPODOC
 ## Sistema de gestão de documentações de API.
+* Versão 0.0.0
 
 ## WIKI do Projeto
 [Acesse nossa wiki e veja toda a estrutura planejada para o sistema](https://github.com/filipeas/repodoc/wiki)
