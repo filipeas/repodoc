@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IUserRepository } from '@domain/users/repositories/IUserRepository';
 
-import { hash, compare } from 'bcrypt';
+import { hash, compare } from 'bcryptjs';
 import { IRequestUpdatePasswordUser } from '@domain/users/request/IRequestUpdatePasswordUser';
 import { BadRequestError } from '@infra/http/errors/BadRequestError';
 
@@ -11,9 +11,13 @@ export class UpdatePasswordUseCase {
     constructor(
         @inject('UserRepository')
         private userRepository: IUserRepository,
-    ) { }
+    ) {}
 
-    async run({ id, c_password, new_password }: IRequestUpdatePasswordUser): Promise<void> {
+    async run({
+        id,
+        c_password,
+        new_password,
+    }: IRequestUpdatePasswordUser): Promise<void> {
         const existentUser = await this.userRepository.findById(id);
 
         if (!existentUser) {

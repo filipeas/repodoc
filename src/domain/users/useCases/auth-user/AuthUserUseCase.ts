@@ -1,4 +1,4 @@
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 
 import { inject, injectable } from 'tsyringe';
 
@@ -14,9 +14,12 @@ export class AuthUserUseCase {
     constructor(
         @inject('UserRepository')
         private userRepository: IUserRepository,
-    ) { }
+    ) {}
 
-    async run({ email, password }: IRequestAuthUser): Promise<IResponseAuthUser> {
+    async run({
+        email,
+        password,
+    }: IRequestAuthUser): Promise<IResponseAuthUser> {
         const user = await this.userRepository.findByEmail(email);
         if (!user) {
             throw new BadRequestError('E-mail ou senha incorreta');
