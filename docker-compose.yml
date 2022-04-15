@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+#   mysqldb:
+#     image: mysql
+#     restart: always
+#     env_file: ./.env
+#     environment:
+#       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+#       MYSQL_DATABASE: $DB_DATABASE
+#     ports:
+#       - 3307:$DB_PORT
+#     volumes:
+#       - db-config:/etc/mysql
+#       - db-data:/var/lib/mysql
+#       - ./db/backup/files/:/data_backup/data
+
+  postgresdb:
+    image: postgres
+    restart: always
+    env_file: ./.env
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_DATABASE
+    logging:
+        options:
+          max-size: 10m
+          max-file: "3"
+    ports:
+      - 5438:$DB_PORT
+    volumes:
+      - db-config:/etc/postgresql
+      - db-data:/var/lib/postgresql/data
+      - ./db/backup/files/:/data_backup/data
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: sh -c "yarn typeorm migration:run && yarn dev:server"
+    ports:
+      - $APP_PORT:$APP_PORT
+    environment:
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_DATABASE: $DB_DATABASE
+    image: repodoc
+    depends_on:
+      - postgresdb # mysqldb
+    stdin_open: true
+    tty: true
+
+#   migration:
+#     build:
+#       context: .
+#     command: yarn typeorm migration:run
+
+volumes:
+  db-config:
+  db-data:
