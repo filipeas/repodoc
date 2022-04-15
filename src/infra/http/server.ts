@@ -21,6 +21,6 @@ app.use(routes);
 
 app.use(handleException);
 
-app.listen(process.env.APP_PORT, () => {
+app.listen(process.env.PORT || process.env.APP_PORT, () => {
     console.log(`Server rodando em ${process.env.APP_URL}`);
 });

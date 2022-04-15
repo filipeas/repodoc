@@ -1,12 +1,12 @@
 import { response, Router } from 'express';
 import { authenticateRouter } from './authenticate.routes';
+import { usersRouter } from './users.routes';
 import { collaboratorsRouter } from './collaborators.routes';
 import { documentsRouter } from './documents.routes';
 import { foldersRouter } from './folders.routes';
 import { levelsRouter } from './levels.routes';
 import { organizationsRouter } from './organizations.routes';
 import { routesRouter } from './routes.routes';
-import { usersRouter } from './users.routes';
 
 const routes = Router();
 
