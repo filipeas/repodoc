@@ -14,6 +14,29 @@ Depois tenha certeza de ter o Docker instalado na sua máquina. Após isso execu
 
 ``` docker-compose up ```
 
+Configure o .env para que possua uma estrutura semelhante a essa:
+```
+# App configuration
+APP_PORT=3333
+APP_URL=http://0.0.0.0:3333
+
+# Database configuration
+DB_TYPE=postgres
+DB_HOST=postgresdb
+DB_PORT=5432 #mysql: 3306
+DB_USER=root
+DB_PASSWORD=root
+DB_DATABASE=repodoc
+
+# ORM configuration
+DB_MIGRATIONS_PATH=./src/infra/typeorm/migrations/*.ts
+DB_ENTITIES=./src/domain/**/entities/*.ts
+DB_MIGRATIONS_DIR=./src/infra/typeorm/migrations
+
+#key authentication
+KEY_AUTH=d6d7cbf35caac567a91718d2d7a135e0
+```
+
 ## Como fazer deploy no heroku
 1. Faça login do container:
 
