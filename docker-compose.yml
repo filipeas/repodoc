@@ -46,11 +46,14 @@ services:
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
       DB_DATABASE: $DB_DATABASE
+    container_name: repodoc
     image: repodoc
     depends_on:
       - postgresdb # mysqldb
     stdin_open: true
     tty: true
+    volumes:
+      - .:/usr/app
 
 #   migration:
 #     build:
